@@ -39,7 +39,7 @@ Egy modern, valós idejű jegyzetblokk alkalmazás WebSocket technológiával, a
 
 ### 1. Klónozás és navigálás
 ```bash
-git clone https://github.com/your-username/real-time-notepad.git
+git clone https://github.com/vnorman1/real-time-notepad--.git
 cd real-time-notepad
 ```
 
@@ -233,7 +233,7 @@ DEBUG = True  # app.py-ban
 
 ## 👥 Szerzők
 
-- **Te** - *Kezdeti munka* - [GitHub](https://github.com/vnorman1)
+- **Norman** - *Kezdeti munka* - [GitHub](https://github.com/vnorman1)
 
 ## 🙏 Köszönetnyilvánítás
 
