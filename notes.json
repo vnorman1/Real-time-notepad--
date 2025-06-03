@@ -1,0 +1,22 @@
+{
+  "content": "Lorem ipsum teszt",
+  "last_modified": "2025-06-03T14:55:41.958167",
+  "sessions": {
+    "79094d79-67cc-4ac3-9e84-a5afb3a531b4": {
+      "connected_at": "2025-06-03T14:48:58.458374",
+      "sid": "IfMKnhnrkXJz-lAgAAAD"
+    },
+    "6bd8216b-7465-4f81-bfc0-835b03c6f5ac": {
+      "connected_at": "2025-06-03T14:53:32.691648",
+      "sid": "47pZ8UW5Y5tcZEvZAAAB"
+    },
+    "aa3ae4e9-130c-482c-b56d-1c27df766a42": {
+      "connected_at": "2025-06-03T14:53:40.041676",
+      "sid": "GZ_Oir-MehmVXpMXAAAF"
+    },
+    "3a22d847-ecb9-4d3a-804c-44d008043a95": {
+      "connected_at": "2025-06-03T14:55:24.780812",
+      "sid": "m_qyDSA2tPl9CXyiAAAH"
+    }
+  }
+}

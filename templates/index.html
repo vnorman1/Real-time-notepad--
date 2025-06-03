@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Real-time Notepad</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --radius: 0.5rem;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+        }
+
+        /* Dark mode támogatás */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #0f172a;
+                --surface: #1e293b;
+                --text-primary: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --border: #334155;
+            }
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header stílusok */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Főtartalom */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 300px;
+            }
+        }
+
+        /* Szövegszerkesztő */
+        .editor-section {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .editor-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .editor-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: calc(var(--radius) * 0.75);
+            background: var(--surface);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--background);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .btn-success:hover {
+            background: #047857;
+            border-color: #047857;
+        }
+
+        /* Szövegmező */
+        .notepad {
+            width: 100%;
+            min-height: 500px;
+            padding: 1.5rem;
+            border: none;
+            resize: vertical;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.7;
+            background: var(--surface);
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .notepad:focus {
+            background: var(--background);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .widget {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .widget-content {
+            padding: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Üzenetek */
+        .message {
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .message-success {
+            background: rgba(5, 150, 105, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+        }
+
+        .message-error {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--danger-color);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        /* Reszponzív dizájn */
+        @media (max-width: 767px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .status-bar {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .notepad {
+                min-height: 400px;
+                font-size: 1rem;
+            }
+            
+            .editor-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .editor-actions {
+                justify-content: center;
+            }
+        }
+
+        /* Animációk */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }        /* Scrollbar stílusok */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Mentett jegyzetek stílusok */
+        .saved-note-item {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+            background: var(--background);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .saved-note-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .saved-note-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .saved-note-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .saved-note-preview {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            max-height: 2.8em;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .saved-note-actions {
+            display: flex;
+            gap: 0.25rem;
+            justify-content: flex-end;
+        }
+
+        .note-action-btn {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: calc(var(--radius) * 0.5);
+            background: var(--surface);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.15s ease;
+        }
+
+        .note-action-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+        }
+
+        .note-action-btn.delete:hover {
+            color: var(--danger-color);
+            border-color: var(--danger-color);
+        }
+
+        /* Modal stílusok */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-header {
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--background);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">📝 Real-time Notepad</a>
+            <div class="status-bar">
+                <div class="status-item">
+                    <span class="status-dot"></span>
+                    <span id="connection-status">Csatlakozás...</span>
+                </div>
+                <div class="status-item">
+                    👥 <span id="user-count">0</span> aktív felhasználó
+                </div>
+                <div class="status-item">
+                    💾 <span id="last-saved">Még nem mentve</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Főtartalom -->
+    <div class="container">
+        <!-- Szövegszerkesztő -->
+        <section class="editor-section">
+            <div class="editor-header">
+                <div class="editor-title">Jegyzetek</div>                <div class="editor-actions">
+                    <button class="btn btn-primary" id="save-as-btn">
+                        💾 Mentés másként
+                    </button>
+                    <button class="btn" id="clear-btn">
+                        🗑️ Törlés
+                    </button>
+                </div>
+            </div>
+            <textarea 
+                class="notepad" 
+                id="notepad" 
+                placeholder="Kezdj el írni... A változások automatikusan szinkronizálódnak minden eszközön!"
+            ></textarea>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Mentett jegyzetek -->
+            <div class="widget">
+                <div class="widget-header">
+                    📚 Mentett jegyzetek
+                    <button class="btn" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; margin-left: auto;" id="refresh-notes-btn">
+                        🔄
+                    </button>
+                </div>
+                <div class="widget-content">
+                    <input 
+                        type="text" 
+                        id="search-notes" 
+                        placeholder="Keresés..." 
+                        style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; background: var(--surface); color: var(--text-primary);"
+                    >
+                    <div id="saved-notes-list" style="max-height: 300px; overflow-y: auto;">
+                        <p style="color: var(--text-secondary); font-size: 0.875rem; text-align: center; padding: 1rem;">
+                            Nincsenek mentett jegyzetek
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statisztikák -->
+            <div class="widget">
+                <div class="widget-header">📊 Statisztikák</div>
+                <div class="widget-content">
+                    <div class="stat-item">
+                        <span class="stat-label">Karakterek</span>
+                        <span class="stat-value" id="char-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Szavak</span>
+                        <span class="stat-value" id="word-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Sorok</span>
+                        <span class="stat-value" id="line-count">1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Aktív felhasználók</span>
+                        <span class="stat-value" id="active-users">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="widget">
+                <div class="widget-header">ℹ️ Információ</div>
+                <div class="widget-content">
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+                        Ez egy valós idejű jegyzetblokk. A változások automatikusan mentődnek és 
+                        szinkronizálódnak minden csatlakozott eszközön.
+                    </p>
+                </div>
+            </div>
+        </aside>
+    </div>    <!-- Üzenetek container -->
+    <div id="messages" style="position: fixed; top: 100px; right: 20px; z-index: 1000; max-width: 300px;"></div>
+
+    <!-- Modal - Mentés másként -->
+    <div id="save-as-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📁 Jegyzet mentése</h3>
+            </div>
+            <div class="modal-body">
+                <input 
+                    type="text" 
+                    id="note-title-input" 
+                    class="modal-input" 
+                    placeholder="Jegyzet címe..."
+                >
+            </div>
+            <div class="modal-actions">
+                <button class="btn" id="cancel-save-btn">Mégse</button>
+                <button class="btn btn-primary" id="confirm-save-btn">Mentés</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    
+    <script>
+        // Socket.IO kapcsolat
+        const socket = io();        // DOM elemek
+        const notepad = document.getElementById('notepad');
+        const saveAsBtn = document.getElementById('save-as-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const connectionStatus = document.getElementById('connection-status');
+        const userCount = document.getElementById('user-count');
+        const lastSaved = document.getElementById('last-saved');
+        const charCount = document.getElementById('char-count');
+        const wordCount = document.getElementById('word-count');
+        const lineCount = document.getElementById('line-count');
+        const activeUsers = document.getElementById('active-users');
+        const messagesContainer = document.getElementById('messages');
+        
+        // Mentett jegyzetek elemek
+        const saveAsModal = document.getElementById('save-as-modal');
+        const noteTitleInput = document.getElementById('note-title-input');
+        const confirmSaveBtn = document.getElementById('confirm-save-btn');
+        const cancelSaveBtn = document.getElementById('cancel-save-btn');
+        const savedNotesList = document.getElementById('saved-notes-list');
+        const searchNotesInput = document.getElementById('search-notes');
+        const refreshNotesBtn = document.getElementById('refresh-notes-btn');
+        
+        let sessionId = null;
+        let saveTimeout = null;
+        
+        // Üzenet megjelenítése
+        function showMessage(text, type = 'success') {
+            const message = document.createElement('div');
+            message.className = `message message-${type} fade-in`;
+            message.innerHTML = `
+                <span>${type === 'success' ? '✅' : '❌'}</span>
+                <span>${text}</span>
+            `;
+            
+            messagesContainer.appendChild(message);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 3000);
+        }
+        
+        // Statisztikák frissítése
+        function updateStats() {
+            const content = notepad.value;
+            const chars = content.length;
+            const words = content.trim() ? content.trim().split(/\s+/).length : 0;
+            const lines = content.split('\n').length;
+            
+            charCount.textContent = chars.toLocaleString();
+            wordCount.textContent = words.toLocaleString();
+            lineCount.textContent = lines.toLocaleString();
+        }
+        
+        // Idő formázása
+        function formatTime(timestamp) {
+            if (!timestamp) return 'Még nem mentve';
+            const date = new Date(timestamp);
+            return date.toLocaleTimeString('hu-HU');
+        }
+        
+        // Socket események
+        socket.on('connect', () => {
+            connectionStatus.textContent = 'Csatlakozva';
+            connectionStatus.parentElement.querySelector('.status-dot').style.background = 'var(--success-color)';
+            console.log('✅ Csatlakozva a szerverhez');
+        });
+        
+        socket.on('disconnect', () => {
+            connectionStatus.textContent = 'Kapcsolat megszakadt';
+            connectionStatus.parentElement.querySelector('.status-dot').style.background = 'var(--danger-color)';
+            console.log('❌ Kapcsolat megszakadt');
+        });
+        
+        socket.on('content_update', (data) => {
+            notepad.value = data.content;
+            if (data.session_id) {
+                sessionId = data.session_id;
+            }
+            if (data.last_modified) {
+                lastSaved.textContent = formatTime(data.last_modified);
+            }
+            updateStats();
+        });
+        
+        socket.on('user_count', (data) => {
+            userCount.textContent = data.count;
+            activeUsers.textContent = data.count;
+        });
+        
+        socket.on('save_success', (data) => {
+            showMessage(data.message, 'success');
+            lastSaved.textContent = formatTime(data.timestamp);
+        });
+        
+        socket.on('error', (data) => {
+            showMessage(data.message, 'error');
+        });
+          socket.on('stats_update', (data) => {
+            charCount.textContent = data.characters.toLocaleString();
+            wordCount.textContent = data.words.toLocaleString();
+            lineCount.textContent = data.lines.toLocaleString();
+            activeUsers.textContent = data.active_users;
+            if (data.last_modified) {
+                lastSaved.textContent = formatTime(data.last_modified);
+            }
+        });
+        
+        // Mentett jegyzetek eseményei
+        socket.on('saved_notes_update', (data) => {
+            displaySavedNotes(data.notes);
+        });
+        
+        // Szöveg változás kezelése
+        notepad.addEventListener('input', () => {
+            // Azonnali statisztika frissítés
+            updateStats();
+            
+            // Debounced mentés
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                socket.emit('content_change', {
+                    content: notepad.value
+                });
+            }, 500);        });
+        
+        // Törlés
+        clearBtn.addEventListener('click', () => {
+            if (confirm('Biztosan törölni szeretnéd a teljes tartalmat?')) {
+                notepad.value = '';
+                socket.emit('content_change', {
+                    content: ''
+                });
+                updateStats();
+            }
+        });
+        
+        // Mentés másként modal
+        saveAsBtn.addEventListener('click', () => {
+            saveAsModal.classList.add('show');
+            noteTitleInput.focus();
+        });
+        
+        cancelSaveBtn.addEventListener('click', () => {
+            saveAsModal.classList.remove('show');
+            noteTitleInput.value = '';
+        });
+        
+        confirmSaveBtn.addEventListener('click', () => {
+            const title = noteTitleInput.value.trim();
+            if (title) {
+                socket.emit('save_note_as', {
+                    title: title,
+                    content: notepad.value
+                });
+                saveAsModal.classList.remove('show');
+                noteTitleInput.value = '';
+            }
+        });
+        
+        // Enter a modal inputban
+        noteTitleInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                confirmSaveBtn.click();
+            }
+        });
+        
+        // Modal bezárása ESC-el
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && saveAsModal.classList.contains('show')) {
+                cancelSaveBtn.click();
+            }
+        });
+        
+        // Modal bezárása háttér kattintására
+        saveAsModal.addEventListener('click', (e) => {
+            if (e.target === saveAsModal) {
+                cancelSaveBtn.click();
+            }
+        });
+        
+        // Keresés a mentett jegyzetekben
+        searchNotesInput.addEventListener('input', () => {
+            const query = searchNotesInput.value.trim();
+            socket.emit('search_saved_notes', { query: query });
+        });
+        
+        // Jegyzetek frissítése
+        refreshNotesBtn.addEventListener('click', () => {
+            socket.emit('get_saved_notes');
+            searchNotesInput.value = '';
+        });
+        
+        // Mentett jegyzetek megjelenítése
+        function displaySavedNotes(notes) {
+            if (notes.length === 0) {
+                savedNotesList.innerHTML = `
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; text-align: center; padding: 1rem;">
+                        Nincsenek mentett jegyzetek
+                    </p>
+                `;
+                return;
+            }
+            
+            savedNotesList.innerHTML = notes.map(note => {
+                const preview = note.content.substring(0, 100);
+                const createdDate = new Date(note.created_at).toLocaleDateString('hu-HU');
+                
+                return `
+                    <div class="saved-note-item" data-note-id="${note.id}">
+                        <div class="saved-note-title">${escapeHtml(note.title)}</div>
+                        <div class="saved-note-meta">
+                            <span>${note.word_count} szó</span>
+                            <span>${createdDate}</span>
+                        </div>
+                        <div class="saved-note-preview">${escapeHtml(preview)}${note.content.length > 100 ? '...' : ''}</div>
+                        <div class="saved-note-actions">
+                            <button class="note-action-btn load" onclick="loadSavedNote(${note.id})">
+                                📂 Betöltés
+                            </button>
+                            <button class="note-action-btn delete" onclick="deleteSavedNote(${note.id}, '${escapeHtml(note.title)}')">
+                                🗑️ Törlés
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // HTML escape függvény
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Mentett jegyzet betöltése
+        function loadSavedNote(noteId) {
+            if (notepad.value.trim() && !confirm('A jelenlegi tartalom el fog veszni. Folytatod?')) {
+                return;
+            }
+            socket.emit('load_saved_note', { id: noteId });
+        }
+        
+        // Mentett jegyzet törlése
+        function deleteSavedNote(noteId, title) {
+            if (confirm(`Biztosan törölni szeretnéd ezt a jegyzetet?\n\n"${title}"`)) {
+                socket.emit('delete_saved_note', { id: noteId });
+            }
+        }
+          // Kezdeti statisztikák lekérése
+        socket.on('connect', () => {
+            socket.emit('get_stats');
+            socket.emit('get_saved_notes');
+        });
+        
+        // Keyboard shortcuts
+        notepad.addEventListener('keydown', (e) => {
+            // Ctrl+S / Cmd+S mentés
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                socket.emit('manual_save');
+            }
+        });
+        
+        // Kezdeti statisztikák
+        updateStats();
+        
+        console.log('📝 Real-time Notepad betöltve');
+    </script>
+</body>
+</html>
