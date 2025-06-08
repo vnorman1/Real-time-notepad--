@@ -360,7 +360,7 @@ def handle_search_saved_notes(data):
 
 if __name__ == '__main__':
     print("🚀 Real-time Notepad indítása...")
-    print("📝 Elérhető: http://localhost:5000")
+    print("📝 Elérhető: http://localhost:{port}")
     print("💾 Jegyzetek automatikusan mentve: notes.json")
     print("🌐 WebSocket támogatás engedélyezve")
     
@@ -368,7 +368,7 @@ if __name__ == '__main__':
     cleanup_sessions()
     
     try:
-        socketio.run(app, host='0.0.0.0', port=5000, debug=True, allow_unsafe_werkzeug=True)
+        socketio.run(app, host='0.0.0.0', port=5001, debug=True, allow_unsafe_werkzeug=True)
     except KeyboardInterrupt:
         print("\n👋 Alkalmazás leállítva")
     except Exception as e:

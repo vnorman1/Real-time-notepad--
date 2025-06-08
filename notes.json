@@ -1,22 +1,26 @@
 {
-  "content": "Lorem ipsum teszt",
-  "last_modified": "2025-06-03T14:55:41.958167",
+  "content": "Cím: Klasszikus Tetris Játék\n\nKategóriák: Játék, Webfejlesztés, JavaScript, Canvas\n\nCímkék: tetris, játék, html5, javascript, canvas, portfólió, retro, reszponzív, open source\n\nLeírás:\nEz a projekt egy klasszikus Tetris játék modern, letisztult webes köntösben, amely Vajda Norman portfóliójának részeként készült. A játék kizárólag HTML5, CSS és JavaScript (Canvas API) felhasználásával valósul meg, így tökéletes példa a webes játékfejlesztés alapjaira és a Canvas grafikus lehetőségeire.\nA cél, hogy a játékos a különböző alakzatokat (tetrominókat) ügyesen elhelyezze a pályán, teljes sorokat hozzon létre, és minél magasabb pontszámot érjen el. A projekt különlegessége a reszponzív dizájn, a sötét/világos mód támogatása, valamint a klasszikus játékélmény modern, portfólióhoz illeszkedő vizuális megjelenítése.\nA Tetris játék nemcsak nosztalgikus szórakozást nyújt, hanem kiváló tanulási lehetőség is mindazoknak, akik szeretnék megérteni a játéklogika, a grafikus megjelenítés és a felhasználói interakciók alapjait a weben. A projekt során nagy hangsúlyt kapott a tiszta, átlátható kód és a felhasználói élmény, így a játék mobilon és asztali gépen is élvezhető.\nA forráskód elérhető a GitHubon, így bárki tanulhat belőle vagy továbbfejlesztheti saját ötletei szerint.",
+  "last_modified": "2025-06-08T21:09:48.360386",
   "sessions": {
-    "79094d79-67cc-4ac3-9e84-a5afb3a531b4": {
-      "connected_at": "2025-06-03T14:48:58.458374",
-      "sid": "IfMKnhnrkXJz-lAgAAAD"
+    "5c02a3f6-9b0a-43a4-b55c-7fbe933adb71": {
+      "connected_at": "2025-06-08T19:55:04.048634",
+      "sid": "NkS1UHfnUA9fdAnOAAAB"
     },
-    "6bd8216b-7465-4f81-bfc0-835b03c6f5ac": {
-      "connected_at": "2025-06-03T14:53:32.691648",
-      "sid": "47pZ8UW5Y5tcZEvZAAAB"
+    "85475fbb-0e85-4c24-9912-54690d1bfe92": {
+      "connected_at": "2025-06-08T20:37:26.449716",
+      "sid": "2vO5kdfg-ULy0_frAAAB"
     },
-    "aa3ae4e9-130c-482c-b56d-1c27df766a42": {
-      "connected_at": "2025-06-03T14:53:40.041676",
-      "sid": "GZ_Oir-MehmVXpMXAAAF"
+    "815ec0a1-8076-4e48-9f39-c13c14c72454": {
+      "connected_at": "2025-06-08T20:37:31.814541",
+      "sid": "TlFY7igku7ZWBj0yAAAD"
     },
-    "3a22d847-ecb9-4d3a-804c-44d008043a95": {
-      "connected_at": "2025-06-03T14:55:24.780812",
-      "sid": "m_qyDSA2tPl9CXyiAAAH"
+    "d99f2a3b-48c1-4a90-a49d-f89676486b0d": {
+      "connected_at": "2025-06-08T20:43:30.161510",
+      "sid": "XW6bsUsnKU7aFdHlAAAC"
+    },
+    "3ce530ad-2cfd-444d-ae32-ae85be94d180": {
+      "connected_at": "2025-06-08T20:43:56.211722",
+      "sid": "87_8x663KZHjKWmJAAAH"
     }
   }
 }

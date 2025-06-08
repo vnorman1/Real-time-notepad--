@@ -1,11 +1,92 @@
 [
   {
-    "id": 1748955268214,
-    "title": "Lorem ipsum",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "created_at": "2025-06-03T14:54:28.214329",
-    "modified_at": "2025-06-03T14:54:28.214346",
-    "word_count": 69,
-    "char_count": 445
+    "id": 1749029342247,
+    "title": "snippet",
+    "content": "JAVASCRIPT\nFRONTEND\nUI-UX\nDinamikus Lista Szűrő\nEgy egyszerű, tiszta JavaScripttel írt komponens, amely lehetővé teszi egy lista elemeinek valós idejű szűrését és rendezését felhasználói input alapján.",
+    "created_at": "2025-06-04T11:29:02.247555",
+    "modified_at": "2025-06-04T11:29:02.247561",
+    "word_count": 26,
+    "char_count": 201
+  },
+  {
+    "id": 1749407873413,
+    "title": "clinav",
+    "content": "# 🗂️ CLI Navigator\n\n**Kategóriák:** CLI, Fájlkezelő, Terminál, Python, Interaktív, Rich\n**Címkék:** cli, file-manager, terminal, python, rich, navigation, interactive, beautiful, cross-platform\n\n---\n\n## Leírás\n\nA **CLI Navigator** egy modern, gyönyörű és interaktív parancssori könyvtárböngésző, amely a Python és a Rich library erejét használja, hogy a fájlrendszerben való navigáció élménye látványos, gyors és kényelmes legyen. A program célja, hogy a hagyományos `ls` vagy `dir` parancsoknál sokkal többet nyújtson: színes, ikonokkal ellátott, részletes táblázatokban jeleníti meg a könyvtárak és fájlok adatait, támogatja a rejtett fájlok kezelését, a gyors keresést, a fa nézetet, valamint a billentyűkkel történő villámgyors navigációt.\n\nA CLI Navigator kiemelten figyel a felhasználói élményre: minden platformon (Windows, Linux, macOS) működik, a billentyűparancsok intuitívak, a hibakezelés elegáns, a megjelenítés pedig alkalmazkodik a terminál méretéhez. Ideális fejlesztőknek, rendszergazdáknak, power usereknek, vagy bárkinek, aki szeretné a parancssorban is élvezni a modern, vizuális fájlböngészés előnyeit. A projekt könnyen bővíthető, jól dokumentált, és teljesen nyílt forráskódú.\n\n---",
+    "created_at": "2025-06-08T20:37:53.413129",
+    "modified_at": "2025-06-08T20:37:53.413136",
+    "word_count": 152,
+    "char_count": 1204
+  },
+  {
+    "id": 1749407946469,
+    "title": "realtime notepad",
+    "content": "Cím:\nReal-time Notepad – Valós idejű kollaboratív jegyzetblokk\n\nKategóriák:\nWebalkalmazás, Jegyzetelés, Kollaboráció, Python, Flask\n\nCímkék:\nreal-time, jegyzet, websocket, flask, socketio, kollaboráció, python, notes, json, reszponzív, dark mode\n\nLeírás:\nA Real-time Notepad egy modern, valós idejű jegyzetblokk alkalmazás, amely lehetővé teszi, hogy több felhasználó egyszerre, zökkenőmentesen szerkesszen közös szöveget böngészőből. A Flask-SocketIO technológiára épülő rendszer minden változást azonnal szinkronizál az összes csatlakozott eszközön, így tökéletes választás csapatmunkához, közös ötleteléshez vagy akár tanulócsoportok számára.\nAz automatikus mentés, a jegyzetek elmentése és visszatöltése, a valós idejű statisztikák, valamint a reszponzív, sötét módot is támogató felület gondoskodik a kényelmes és biztonságos használatról. A projekt egyszerűen telepíthető, Python környezetben futtatható, és JSON fájlokban tárolja az adatokat, így könnyen testreszabható és bővíthető.\nIdeális választás mindenkinek, aki gyors, megbízható és modern jegyzetelési megoldást keres, akár egyedül, akár csapatban!",
+    "created_at": "2025-06-08T20:39:06.469854",
+    "modified_at": "2025-06-08T20:39:06.469866",
+    "word_count": 131,
+    "char_count": 1113
+  },
+  {
+    "id": 1749408210197,
+    "title": "uiux",
+    "content": "Cím:\nModern Tailwind CSS Komponens Könyvtár\n\nKategóriák:\nUI/UX, Frontend, Web Design, Komponens Könyvtár, Tailwind CSS\n\nCímkék:\ntailwindcss, ui komponensek, design system, reszponzív, animáció, glass morphism, neumorphism, javascript, modern web, frontend, css, html\n\nLeírás:\nEz a projekt egy átfogó, modern Tailwind CSS komponens könyvtár, amely több mint 30 interaktív és reszponzív UI elemet tartalmaz. A könyvtár célja, hogy bemutassa a legújabb webdesign trendeket – mint a glass morphism, neumorphism, gradient animációk és fejlett mikro-interakciók – mindezt letisztult, könnyen másolható HTML és Tailwind CSS kóddal. A komponensek között megtalálhatók profilkártyák, gombok, információs kártyák, navigációs elemek, űrlapok, dashboard widgetek, e-kereskedelmi és közösségi média elemek, valamint haladó adatvizualizációs és naptár komponensek is.\nA könyvtár előnye, hogy minden elem teljesen reszponzív, mobilbarát, és azonnal beilleszthető bármilyen modern webes projektbe. A lebegő, animált oldalsó navigáció különösen egyedi élményt nyújt, a fejlett JavaScript interakciók pedig élővé teszik a felületet. Ideális választás fejlesztőknek, designereknek és bárkinek, aki gyorsan szeretne prémium minőségű, modern UI komponenseket használni saját projektjeiben.",
+    "created_at": "2025-06-08T20:43:30.197396",
+    "modified_at": "2025-06-08T20:43:50.627401",
+    "word_count": 159,
+    "char_count": 1268
+  },
+  {
+    "id": 1749408319647,
+    "title": "AISAASY",
+    "content": "Cím:\nModuláris AI Asszisztens SAAS – Gemini API-val\n\nKategóriák:\nAI, Webfejlesztés, Chatbot, SAAS, Automatizáció\n\nCímkék:\nAI asszisztens, Gemini API, weboldal chatbot, interaktív navigáció, automatikus görgetés, JavaScript, reszponzív UI, analitika, testreszabható, adatvédelem\n\nLeírás:\nEz a projekt egy modern, moduláris AI asszisztens, amely bármilyen weboldalhoz egyszerűen integrálható egyetlen JavaScript fájl segítségével. A rendszer a Google Gemini API-t használja, így képes intelligens, kontextusfüggő válaszokat adni a látogatók kérdéseire, miközben feltérképezi az oldal szerkezetét és tartalmát. Az asszisztens automatikus görgetéssel, vizuális kiemeléssel és intelligens elemfelismeréssel segíti a felhasználókat a weboldalon való navigációban. Teljesen testreszabható, támogatja a reszponzív dizájnt, fejlett analitikát kínál, és minden adatot helyileg, biztonságosan kezel. Ideális e-commerce, céges, portfólió, oktatási vagy szolgáltató oldalakhoz, ahol fontos a gyors, interaktív és személyre szabott ügyfélélmény.",
+    "created_at": "2025-06-08T20:45:19.647425",
+    "modified_at": "2025-06-08T20:45:19.647437",
+    "word_count": 120,
+    "char_count": 1031
+  },
+  {
+    "id": 1749408402968,
+    "title": "typeless.css",
+    "content": "Cím:\nTypeless.css – Klassz nélküli, modern CSS keretrendszer\n\nKategóriák:\nCSS keretrendszer, UI/UX, Webfejlesztés, Reszponzív dizájn\n\nCímkék:\ncss, classless, minimal, responsive, accessibility, design, framework, web, typeless, modern, open-source\n\nLeírás:\nA Typeless.css egy forradalmi, klassz nélküli CSS keretrendszer, amely lehetővé teszi, hogy gyönyörű, modern weboldalakat készíts anélkül, hogy egyetlen CSS osztályt is használnod kellene. A svájci dizájn precizitását ötvözi a japán minimalizmussal, így minden HTML elem automatikusan professzionális, letisztult megjelenést kap. A keretrendszer teljesen reszponzív, akadálymentes, és kizárólag CSS-t használ – nincs szükség JavaScriptre. Könnyen testreszabható CSS változókkal, támogatja a modern böngészőket, és gondoskodik a régebbi verziókban is a fokozatos leépülésről. Ideális választás azoknak, akik gyorsan, kompromisszumok nélkül szeretnének esztétikus és hozzáférhető weboldalakat készíteni.",
+    "created_at": "2025-06-08T20:46:42.968691",
+    "modified_at": "2025-06-08T20:46:42.968697",
+    "word_count": 112,
+    "char_count": 958
+  },
+  {
+    "id": 1749408605001,
+    "title": "dropflow",
+    "content": "Cím:\nDropFlow – Modern Helyi Fájlmegosztó Webalkalmazás\n\nKategóriák:\nWebalkalmazás, Fájlmegosztás, Hálózati eszköz, Python\n\nCímkék:\nfájlmegosztó, flask, python, webapp, helyi hálózat, drag and drop, qr kód, rendszerfigyelés, modern ui, responsive, pillow, psutil, werkzeug, qrcode\n\nLeírás:\nA DropFlow egy modern, letisztult és könnyen használható webes fájlmegosztó alkalmazás, amelyet kifejezetten helyi hálózaton történő gyors és biztonságos fájlátvitelre fejlesztettek. A projekt Python nyelven, a Flask keretrendszerre épül, és olyan további csomagokat használ, mint a Pillow (képfeldolgozás), a qrcode (QR kód generálás), a psutil (rendszerinformációk) és a Werkzeug (WSGI utility). A DropFlow célja, hogy a felhasználók egyszerűen, böngészőből, telepítés nélkül tudjanak fájlokat feltölteni, megosztani és kezelni bármilyen eszközről – legyen az számítógép, tablet vagy mobiltelefon. Támogatja a drag & drop feltöltést, élő előnézetet, QR kódos mobil elérést, valamint valós idejű rendszerfigyelést (CPU, RAM, tárhely). A modern, reszponzív felületnek és a sötét/világos témának köszönhetően minden platformon esztétikus és felhasználóbarát élményt nyújt. Ideális választás irodai, otthoni vagy oktatási környezetben, ahol gyors és egyszerű fájlmegosztásra van szükség helyi hálózaton belül.",
+    "created_at": "2025-06-08T20:50:05.001334",
+    "modified_at": "2025-06-08T20:50:05.001342",
+    "word_count": 162,
+    "char_count": 1297
+  },
+  {
+    "id": 1749408823161,
+    "title": "photoroom",
+    "content": "Cím:\nKépoptimalizáló Pro X – Modern Tömeges Képfeldolgozó\n\nKategóriák:\nKépfeldolgozás, Automatizálás, Python, Asztali alkalmazás\n\nCímkék:\nbatch, image processing, tkinter, pillow, rembg, heic, png, jpeg, webp, gui, exif, tömeges, automatizálás, háttéreltávolítás\n\nLeírás:\nA Képoptimalizáló Pro X egy modern, könnyen használható asztali alkalmazás, amelyet kifejezetten arra fejlesztettem, hogy egyszerre akár több száz képet is gyorsan és hatékonyan lehessen feldolgozni. A program támogatja a legnépszerűbb képformátumokat (JPG, PNG, WEBP, BMP, TIFF, GIF, HEIC/HEIF), és lehetőséget ad a képek átméretezésére, elforgatására, tükrözésére, háttér eltávolítására (rembg integrációval), színhőmérséklet és fényerő állítására, valamint a metaadatok megőrzésére vagy eltávolítására.\n\nA projektet azért hoztam létre, mert a munkám során gyakran előfordult, hogy több száz képet kellett egy adott formátumba, méretbe vagy stílusba hoznom – például webshop termékfotók, portfóliók vagy közösségi média képek előkészítésekor. Kézi feldolgozással ez órákat, akár napokat is igénybe vett volna, de ezzel az eszközzel a teljes folyamat néhány perc alatt elvégezhető. A felhasználóbarát felület, a drag & drop támogatás, az előnézeti lehetőség és a kötegelt export mind azt szolgálják, hogy a képfeldolgozás ne legyen többé időrabló, monoton feladat.\n\nA Képoptimalizáló Pro X ideális választás mindenkinek, aki rendszeresen dolgozik nagy mennyiségű képpel, és szeretné a munkafolyamatát gyorsabbá, átláthatóbbá és kényelmesebbé tenni.",
+    "created_at": "2025-06-08T20:53:43.161071",
+    "modified_at": "2025-06-08T20:53:43.161078",
+    "word_count": 195,
+    "char_count": 1521
+  },
+  {
+    "id": 1749408924877,
+    "title": "snake",
+    "content": "Cím: Klasszikus Snake Játék\n\nKategóriák: Játék, Webfejlesztés, JavaScript, Canvas\n\nCímkék: snake, játék, html5, javascript, canvas, portfólió, retro, reszponzív, open source\n\nLeírás:\nEz a projekt egy modern, letisztult felületű klasszikus Snake játék, amely Vajda Norman portfóliójának részeként készült. A játék HTML5 Canvas technológiával és tiszta JavaScript-tel valósul meg, így nemcsak szórakoztató, hanem kiváló példa is a webes játékfejlesztés alapjaira. A cél, hogy a felhasználó irányítsa a kígyót, gyűjtse az ételt, és minél hosszabbra nőjön anélkül, hogy falnak vagy saját magának ütközne.\nA projekt különlegessége a reszponzív dizájn, a sötét/világos mód támogatása, valamint a letisztult, portfólióhoz illeszkedő vizuális megjelenés. Ideális bemutatója annak, hogyan lehet klasszikus játékokat modern webes technológiákkal újraalkotni, miközben a kód tisztaságára és a felhasználói élményre is nagy hangsúlyt fektetünk.\nA Snake játék nemcsak nosztalgikus élményt nyújt, hanem kiváló tanulási lehetőség is mindazoknak, akik szeretnék megérteni a játéklogika, a grafikus megjelenítés és a felhasználói interakciók alapjait a weben.",
+    "created_at": "2025-06-08T20:55:24.877922",
+    "modified_at": "2025-06-08T20:55:24.877932",
+    "word_count": 148,
+    "char_count": 1142
+  },
+  {
+    "id": 1749408960822,
+    "title": "tetris",
+    "content": "Cím: Klasszikus Tetris Játék\n\nKategóriák: Játék, Webfejlesztés, JavaScript, Canvas\n\nCímkék: tetris, játék, html5, javascript, canvas, portfólió, retro, reszponzív, open source\n\nLeírás:\nEz a projekt egy klasszikus Tetris játék modern, letisztult webes köntösben, amely Vajda Norman portfóliójának részeként készült. A játék kizárólag HTML5, CSS és JavaScript (Canvas API) felhasználásával valósul meg, így tökéletes példa a webes játékfejlesztés alapjaira és a Canvas grafikus lehetőségeire.\nA cél, hogy a játékos a különböző alakzatokat (tetrominókat) ügyesen elhelyezze a pályán, teljes sorokat hozzon létre, és minél magasabb pontszámot érjen el. A projekt különlegessége a reszponzív dizájn, a sötét/világos mód támogatása, valamint a klasszikus játékélmény modern, portfólióhoz illeszkedő vizuális megjelenítése.\nA Tetris játék nemcsak nosztalgikus szórakozást nyújt, hanem kiváló tanulási lehetőség is mindazoknak, akik szeretnék megérteni a játéklogika, a grafikus megjelenítés és a felhasználói interakciók alapjait a weben. A projekt során nagy hangsúlyt kapott a tiszta, átlátható kód és a felhasználói élmény, így a játék mobilon és asztali gépen is élvezhető.\nA forráskód elérhető a GitHubon, így bárki tanulhat belőle vagy továbbfejlesztheti saját ötletei szerint.",
+    "created_at": "2025-06-08T20:56:00.822121",
+    "modified_at": "2025-06-08T20:56:00.822127",
+    "word_count": 169,
+    "char_count": 1276
   }
 ]
