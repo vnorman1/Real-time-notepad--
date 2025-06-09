@@ -66,11 +66,30 @@
             --space-12: 48px;
             --space-16: 64px;
             --space-20: 80px;
+        }        /* Dark mode - refined for Apple/NYT aesthetic */
+        [data-theme="dark"] {
+            --background: #000000;
+            --surface: #1C1C1E;
+            --surface-elevated: #2C2C2E;
+            --surface-secondary: #1C1C1E;
+            
+            --text-primary: #FFFFFF;
+            --text-secondary: #EBEBF5;
+            --text-tertiary: #ABABAB;
+            --text-link: #0A84FF;
+            
+            --border-light: #2C2C2E;
+            --border: #38383A;
+            --border-medium: #48484A;
+            
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.6);
         }
-
-        /* Dark mode - refined for Apple/NYT aesthetic */
+        
         @media (prefers-color-scheme: dark) {
-            :root {
+            :root:not([data-theme="light"]) {
                 --background: #000000;
                 --surface: #1C1C1E;
                 --surface-elevated: #2C2C2E;
@@ -90,7 +109,7 @@
                 --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
                 --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.6);
             }
-        }        body {
+        }body {
             font-family: var(--font-sans);
             background: var(--background);
             color: var(--text-primary);
@@ -769,8 +788,60 @@
             font-weight: 400;
         }
 
-        /* Enhanced message positioning */
-        #messages {
+        /* Theme toggle button - Apple inspired */
+        .theme-toggle {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: var(--surface-secondary);
+            border-radius: 14px;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            padding: 2px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--surface-elevated);
+            border-color: var(--border-medium);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.98);
+        }
+
+        .theme-toggle-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-toggle.dark .theme-toggle-icon {
+            transform: translateX(22px);
+            background: linear-gradient(135deg, #E6E6FA, #D3D3D3);
+        }
+
+        .theme-toggle-icon::before {
+            content: '☀️';
+        }
+
+        .theme-toggle.dark .theme-toggle-icon::before {
+            content: '🌙';
+        }
+
+        /* Enhanced message positioning */        #messages {
             position: fixed;
             top: calc(var(--space-16) + 60px);
             right: var(--space-6);
@@ -791,16 +862,21 @@
                 <span class="logo-icon">📝</span>
                 Real-time Notepad
             </a>
-            <div class="status-bar">
-                <div class="status-item">
-                    <span class="status-dot"></span>
-                    <span id="connection-status">Csatlakozás...</span>
+            <div style="display: flex; align-items: center; gap: var(--space-6);">
+                <div class="status-bar">
+                    <div class="status-item">
+                        <span class="status-dot"></span>
+                        <span id="connection-status">Csatlakozás...</span>
+                    </div>
+                    <div class="status-item">
+                        👥 <span id="user-count">0</span> aktív felhasználó
+                    </div>
+                    <div class="status-item">
+                        💾 <span id="last-saved">Még nem mentve</span>
+                    </div>
                 </div>
-                <div class="status-item">
-                    👥 <span id="user-count">0</span> aktív felhasználó
-                </div>
-                <div class="status-item">
-                    💾 <span id="last-saved">Még nem mentve</span>
+                <div class="theme-toggle" id="theme-toggle">
+                    <div class="theme-toggle-icon"></div>
                 </div>
             </div>
         </div>
@@ -924,6 +1000,32 @@
         const lineCount = document.getElementById('line-count');
         const activeUsers = document.getElementById('active-users');
         const messagesContainer = document.getElementById('messages');
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        // Theme management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 
+                              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            setTheme(savedTheme);
+        }
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeToggle.classList.toggle('dark', theme === 'dark');
+            localStorage.setItem('theme', theme);
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+        
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Initialize theme on page load
+        initTheme();
         
         // Mentett jegyzetek elemek
         const saveAsModal = document.getElementById('save-as-modal');
