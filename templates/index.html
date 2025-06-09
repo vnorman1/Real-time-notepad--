@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📝 Real-time Notepad</title>
-    <style>
+    <title>📝 Real-time Notepad</title>    <style>
         * {
             margin: 0;
             padding: 0;
@@ -12,84 +11,166 @@
         }
 
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #64748b;
-            --success-color: #059669;
-            --warning-color: #d97706;
-            --danger-color: #dc2626;
-            --background: #f8fafc;
-            --surface: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --radius: 0.5rem;
-            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+            /* NYT + Apple inspired color palette */
+            --primary-color: #007AFF;
+            --primary-hover: #0056CC;
+            --secondary-color: #8E8E93;
+            --success-color: #34C759;
+            --warning-color: #FF9F0A;
+            --danger-color: #FF3B30;
+            
+            /* Refined background colors */
+            --background: #FAFAFA;
+            --surface: #FFFFFF;
+            --surface-elevated: #FFFFFF;
+            --surface-secondary: #F5F5F7;
+            
+            /* Typography colors */
+            --text-primary: #1D1D1F;
+            --text-secondary: #6E6E73;
+            --text-tertiary: #8E8E93;
+            --text-link: #007AFF;
+            
+            /* Border and dividers */
+            --border-light: #F2F2F7;
+            --border: #E5E5EA;
+            --border-medium: #D1D1D6;
+            
+            /* Shadows - more refined */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.16);
+            
+            /* Border radius - Apple-inspired */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            
+            /* Typography - NYT inspired with Apple refinement */
+            --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'New York', 'Times New Roman', serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+            --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Fira Code', monospace;
+            
+            /* Spacing scale */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-10: 40px;
+            --space-12: 48px;
+            --space-16: 64px;
+            --space-20: 80px;
         }
 
-        /* Dark mode támogatás */
+        /* Dark mode - refined for Apple/NYT aesthetic */
         @media (prefers-color-scheme: dark) {
             :root {
-                --background: #0f172a;
-                --surface: #1e293b;
-                --text-primary: #f1f5f9;
-                --text-secondary: #94a3b8;
-                --border: #334155;
+                --background: #000000;
+                --surface: #1C1C1E;
+                --surface-elevated: #2C2C2E;
+                --surface-secondary: #1C1C1E;
+                
+                --text-primary: #FFFFFF;
+                --text-secondary: #EBEBF5;
+                --text-tertiary: #ABABAB;
+                --text-link: #0A84FF;
+                
+                --border-light: #2C2C2E;
+                --border: #38383A;
+                --border-medium: #48484A;
+                
+                --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+                --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
+                --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.6);
             }
-        }
-
-        body {
+        }        body {
             font-family: var(--font-sans);
             background: var(--background);
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
+            font-size: 17px; /* Apple's optimal reading size */
+            letter-spacing: -0.022em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Header stílusok */
+        /* Header - NYT inspired with Apple refinement */
         .header {
             background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--border-light);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: var(--shadow);
+            padding: var(--space-4) 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 var(--space-6);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            gap: var(--space-6);
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
             text-decoration: none;
+            letter-spacing: -0.04em;
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            transition: color 0.2s ease;
+        }
+
+        .logo:hover {
+            color: var(--primary-color);
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
         }
 
         .status-bar {
             display: flex;
-            gap: 1rem;
+            gap: var(--space-6);
             align-items: center;
-            flex-wrap: wrap;
-            font-size: 0.875rem;
+            font-size: 14px;
             color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .status-item {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--surface-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+
+        .status-item:hover {
+            background: var(--surface-elevated);
+            border-color: var(--border);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
         }
 
         .status-dot {
@@ -97,152 +178,258 @@
             height: 8px;
             border-radius: 50%;
             background: var(--success-color);
-            animation: pulse 2s infinite;
+            animation: pulse 2s infinite ease-in-out;
+            box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.4);
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Főtartalom */
+            0% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.4);
+            }
+            50% { 
+                transform: scale(1.1);
+                box-shadow: 0 0 0 4px rgba(52, 199, 89, 0);
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(52, 199, 89, 0);
+            }
+        }        /* Main container - Apple inspired layout */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: var(--space-10) var(--space-6);
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2rem;
+            gap: var(--space-8);
             min-height: calc(100vh - 120px);
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 1024px) {
             .container {
-                grid-template-columns: 1fr 300px;
+                grid-template-columns: 2fr 1fr;
+                gap: var(--space-12);
+                padding: var(--space-12) var(--space-6);
             }
         }
 
-        /* Szövegszerkesztő */
+        /* Editor section - NYT inspired writing experience */
         .editor-section {
             background: var(--surface);
-            border-radius: var(--radius);
+            border-radius: var(--radius-xl);
             box-shadow: var(--shadow);
             overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .editor-section:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border);
         }
 
         .editor-header {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
+            padding: var(--space-6);
+            border-bottom: 1px solid var(--border-light);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            background: var(--surface-secondary);
         }
 
         .editor-title {
-            font-weight: 600;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
             color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
         .editor-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: var(--space-3);
         }
 
+        /* Buttons - Apple inspired design system */
         .btn {
-            padding: 0.5rem 1rem;
+            padding: var(--space-3) var(--space-4);
             border: 1px solid var(--border);
-            border-radius: calc(var(--radius) * 0.75);
+            border-radius: var(--radius);
             background: var(--surface);
             color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.15s ease;
-            font-size: 0.875rem;
-            font-weight: 500;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: var(--space-2);
             text-decoration: none;
+            font-family: var(--font-sans);
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn:hover {
-            background: var(--background);
-            border-color: var(--primary-color);
+            background: var(--surface-elevated);
+            border-color: var(--border-medium);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: none;
         }
 
         .btn-primary {
             background: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
-            border-color: #1d4ed8;
+            background: var(--primary-hover);
+            border-color: var(--primary-hover);
+            box-shadow: var(--shadow);
         }
 
         .btn-success {
             background: var(--success-color);
             color: white;
             border-color: var(--success-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-success:hover {
-            background: #047857;
-            border-color: #047857;
-        }
-
-        /* Szövegmező */
+            background: #28A745;
+            border-color: #28A745;
+            box-shadow: var(--shadow);
+        }        /* Writing area - NYT inspired with Apple refinement */
         .notepad {
             width: 100%;
-            min-height: 500px;
-            padding: 1.5rem;
+            min-height: 600px;
+            padding: var(--space-8);
             border: none;
             resize: vertical;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            line-height: 1.7;
+            font-family: var(--font-display);
+            font-size: 18px;
+            line-height: 1.6;
             background: var(--surface);
             color: var(--text-primary);
             outline: none;
+            letter-spacing: -0.011em;
+            transition: all 0.2s ease;
         }
 
         .notepad:focus {
-            background: var(--background);
+            background: var(--surface);
+            box-shadow: inset 0 0 0 2px var(--primary-color);
         }
 
-        /* Sidebar */
+        .notepad::placeholder {
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+
+        /* Search input styling */
+        #search-notes {
+            width: 100%;
+            padding: var(--space-3);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            background: var(--surface-secondary);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        #search-notes:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: var(--surface);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        #search-notes::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        /* Sidebar - Apple card design */
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: var(--space-6);
         }
 
         .widget {
             background: var(--surface);
-            border-radius: var(--radius);
+            border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
             overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+
+        .widget:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border);
         }
 
         .widget-header {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            font-weight: 600;
+            padding: var(--space-5);
+            border-bottom: 1px solid var(--border-light);
+            font-weight: 700;
+            font-size: 16px;
             color: var(--text-primary);
+            background: var(--surface-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .widget-content {
-            padding: 1rem;
+            padding: var(--space-5);
         }
 
         .stat-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border);
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+
+        .stat-item:hover {
+            background: var(--surface-secondary);
+            margin: 0 calc(-1 * var(--space-5));
+            padding-left: var(--space-5);
+            padding-right: var(--space-5);
+            border-radius: var(--radius-sm);
         }
 
         .stat-item:last-child {
@@ -251,133 +438,157 @@
 
         .stat-label {
             color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .stat-value {
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 500;
+        }        .stat-value {
+            font-weight: 700;
             color: var(--text-primary);
+            font-size: 16px;
+            font-variant-numeric: tabular-nums;
         }
 
-        /* Üzenetek */
+        /* Messages - Apple inspired notifications */
         .message {
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
+            padding: var(--space-4) var(--space-5);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
+            gap: var(--space-3);
+            font-size: 15px;
+            font-weight: 500;
+            backdrop-filter: blur(20px);
+            animation: slideInDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message-success {
-            background: rgba(5, 150, 105, 0.1);
+            background: rgba(52, 199, 89, 0.15);
             color: var(--success-color);
-            border: 1px solid rgba(5, 150, 105, 0.2);
+            border: 1px solid rgba(52, 199, 89, 0.3);
+            box-shadow: var(--shadow-sm);
         }
 
         .message-error {
-            background: rgba(220, 38, 38, 0.1);
+            background: rgba(255, 59, 48, 0.15);
             color: var(--danger-color);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-        }
-
-        /* Reszponzív dizájn */
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            box-shadow: var(--shadow-sm);
+        }        /* Responsive Design - Mobile first approach */
         @media (max-width: 767px) {
             .header-content {
                 flex-direction: column;
-                text-align: center;
+                align-items: stretch;
+                gap: var(--space-4);
             }
             
             .status-bar {
                 justify-content: center;
                 flex-wrap: wrap;
+                gap: var(--space-3);
             }
             
             .container {
-                padding: 1rem;
-                gap: 1rem;
+                padding: var(--space-6) var(--space-4);
+                gap: var(--space-6);
             }
             
             .notepad {
                 min-height: 400px;
-                font-size: 1rem;
+                font-size: 17px;
+                padding: var(--space-6);
             }
             
             .editor-header {
                 flex-direction: column;
                 align-items: stretch;
+                gap: var(--space-4);
             }
             
             .editor-actions {
                 justify-content: center;
             }
+
+            .btn {
+                justify-content: center;
+                padding: var(--space-4);
+            }
         }
 
-        /* Animációk */
-        .fade-in {
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }        /* Scrollbar stílusok */
+        /* Refined scrollbar - Apple inspired */
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--background);
+            background: transparent;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 4px;
+            background: var(--border-medium);
+            border-radius: 6px;
+            transition: background 0.2s ease;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-secondary);
+            background: var(--text-tertiary);
         }
 
-        /* Mentett jegyzetek stílusok */
+        /* Firefox scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-medium) transparent;
+        }        /* Saved notes - Apple card design */
         .saved-note-item {
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 0.5rem;
-            background: var(--background);
+            padding: var(--space-4);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-3);
+            background: var(--surface);
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .saved-note-item:hover {
-            border-color: var(--primary-color);
-            box-shadow: var(--shadow);
+            border-color: var(--border-medium);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
         .saved-note-title {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 0.25rem;
-            font-size: 0.875rem;
+            margin-bottom: var(--space-2);
+            font-size: 15px;
+            line-height: 1.3;
         }
 
         .saved-note-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.25rem;
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-2);
+            font-weight: 500;
         }
 
         .saved-note-preview {
-            font-size: 0.75rem;
+            font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.4;
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--space-3);
             max-height: 2.8em;
             overflow: hidden;
             display: -webkit-box;
@@ -387,32 +598,34 @@
 
         .saved-note-actions {
             display: flex;
-            gap: 0.25rem;
+            gap: var(--space-2);
             justify-content: flex-end;
         }
 
         .note-action-btn {
-            padding: 0.25rem 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: calc(var(--radius) * 0.5);
-            background: var(--surface);
+            padding: var(--space-2) var(--space-3);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            background: var(--surface-secondary);
             color: var(--text-secondary);
             cursor: pointer;
-            font-size: 0.75rem;
-            transition: all 0.15s ease;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
         }
 
         .note-action-btn:hover {
             color: var(--text-primary);
-            border-color: var(--primary-color);
+            border-color: var(--border-medium);
+            background: var(--surface-elevated);
+            transform: translateY(-1px);
         }
 
         .note-action-btn.delete:hover {
             color: var(--danger-color);
-            border-color: var(--danger-color);
-        }
-
-        /* Modal stílusok */
+            border-color: rgba(255, 59, 48, 0.3);
+            background: rgba(255, 59, 48, 0.1);
+        }        /* Modal - Apple inspired design */
         .modal {
             display: none;
             position: fixed;
@@ -420,10 +633,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            animation: fadeIn 0.2s ease;
         }
 
         .modal.show {
@@ -432,54 +647,150 @@
 
         .modal-content {
             background: var(--surface);
-            border-radius: var(--radius);
-            padding: 2rem;
-            max-width: 500px;
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            max-width: 480px;
             width: 90%;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .modal-header {
-            margin-bottom: 1rem;
+            margin-bottom: var(--space-6);
+            text-align: center;
         }
 
         .modal-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
             color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
 
         .modal-body {
-            margin-bottom: 1.5rem;
+            margin-bottom: var(--space-8);
         }
 
         .modal-input {
             width: 100%;
-            padding: 0.75rem;
+            padding: var(--space-4);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: var(--background);
+            border-radius: var(--radius-lg);
+            background: var(--surface-secondary);
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 16px;
+            font-family: var(--font-sans);
+            transition: all 0.2s ease;
         }
 
         .modal-input:focus {
             outline: none;
             border-color: var(--primary-color);
+            background: var(--surface);
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        }
+
+        .modal-input::placeholder {
+            color: var(--text-tertiary);
         }
 
         .modal-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: var(--space-3);
             justify-content: flex-end;
+        }        /* Enhanced animations and micro-interactions */
+        .fade-in {
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        /* Focus states - Apple inspired */
+        .notepad:focus {
+            background: var(--surface);
+            box-shadow: inset 0 0 0 2px var(--primary-color);
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Refined button animations */
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+        }
+
+        /* Status indicators */
+        .status-offline .status-dot {
+            background: var(--danger-color);
+            animation: none;
+        }
+
+        .status-connecting .status-dot {
+            background: var(--warning-color);
+            animation: pulse 1s infinite ease-in-out;
+        }
+
+        /* Refined widget hover effects */
+        .widget:hover .widget-header {
+            background: var(--surface-elevated);
+        }
+
+        /* Typography refinements */
+        .info-text {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        /* Enhanced message positioning */
+        #messages {
+            position: fixed;
+            top: calc(var(--space-16) + 60px);
+            right: var(--space-6);
+            z-index: 1000;
+            max-width: 360px;
+            pointer-events: none;
+        }
+
+        #messages .message {
+            pointer-events: auto;
         }
     </style>
 </head>
-<body>
-    <!-- Header -->
+<body>    <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <a href="#" class="logo">📝 Real-time Notepad</a>
+            <a href="#" class="logo">
+                <span class="logo-icon">📝</span>
+                Real-time Notepad
+            </a>
             <div class="status-bar">
                 <div class="status-item">
                     <span class="status-dot"></span>
@@ -525,16 +836,14 @@
                     <button class="btn" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; margin-left: auto;" id="refresh-notes-btn">
                         🔄
                     </button>
-                </div>
-                <div class="widget-content">
+                </div>                <div class="widget-content">
                     <input 
                         type="text" 
                         id="search-notes" 
                         placeholder="Keresés..." 
-                        style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; background: var(--surface); color: var(--text-primary);"
                     >
-                    <div id="saved-notes-list" style="max-height: 300px; overflow-y: auto;">
-                        <p style="color: var(--text-secondary); font-size: 0.875rem; text-align: center; padding: 1rem;">
+                    <div id="saved-notes-list" style="max-height: 300px; overflow-y: auto; margin-top: var(--space-4);">
+                        <p class="info-text" style="text-align: center; padding: var(--space-6);">
                             Nincsenek mentett jegyzetek
                         </p>
                     </div>
@@ -564,19 +873,18 @@
                 </div>
             </div>
 
-            <!-- Info -->
-            <div class="widget">
+            <!-- Info -->            <div class="widget">
                 <div class="widget-header">ℹ️ Információ</div>
                 <div class="widget-content">
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+                    <p class="info-text">
                         Ez egy valós idejű jegyzetblokk. A változások automatikusan mentődnek és 
                         szinkronizálódnak minden csatlakozott eszközön.
                     </p>
                 </div>
             </div>
         </aside>
-    </div>    <!-- Üzenetek container -->
-    <div id="messages" style="position: fixed; top: 100px; right: 20px; z-index: 1000; max-width: 300px;"></div>
+    </div>    <!-- Messages container -->
+    <div id="messages"></div>
 
     <!-- Modal - Mentés másként -->
     <div id="save-as-modal" class="modal">
